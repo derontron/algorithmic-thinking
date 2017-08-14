@@ -1,0 +1,397 @@
+Algorithms Final Commit.
+
+Linear Search (Simple Search)
+- takes n steps through a list
+ex). You have a list of 10 items, Linear Search will step through each
+element until item is found.
+
+Binary Search
+- takes log2 n steps for any list of n
+- list of n must be sorted
+
+Example of Binary search
+ex). I am thinking of a number from 1 to 1024.
+
+Binary search algo would check the halfway mark, 512 to determine if
+this is the number I'm thinking. It's too low. So take the half of 512,
+which is 256. And so on..
+
+A way to think about this is, 1024 in the worst case is 10 steps or halving
+1024, ten times.
+
+
+
+Running Time / Big O Notation
+
+Linear Time O(n):
+Ex). Say you have a list of 100 elements. The max number of guesses = list length
+So this means that we call this: Linear Time
+
+Logarithmic Time O(log n):
+Ex). Say you have 100 item list, Binary search would take 7 guesses at most.
+Ex). Say you have 4 Billion item list, Binary Search would take 32 guesses at most.
+
+Ex). Moon Landing
+Say you have a spaceship that you need to land on the moon. You need to make the decision
+in 10 seconds at most. Say your dataset is 1 Billion elements taking 1 ms for each element.
+  - If you use linear search, that'd be 1 Billion ms or 11.5 days.
+  - If you use binary search, that'd be 32 ms or 0.032 seconds.
+  - Binary Seach is faster by a factor of 33 million.
+
+
+It is not enough to know how long an algorithm takes to run--also must know how the running
+time increases as the list size increases. This is where Big O comes in.
+
+Big O tells you how fast an algorithm is. For example, you have a list of size n. You use binary
+search. The runtime in Big O notation is O(log n). Big O does not tell you the time in seconds.
+Big O lets you compare the number of operations--it tells you how fast the algorithm grows.
+
+Here's another example. Binary search needs log n operations to check a list size of n.
+What's the runtime in Big O notation? It's O(log n)
+
+In general Big O is written as: Big O ---> O (n) <--- n number of operations.
+
+Say you are looking for a name in the phonebook. The name is Annabel. Say you find this name
+on first try. Is the runtime O(1) or O(n)? Simple search still takes O(n) time.
+
+Big O is about the worst case scenario which is assuring because it means that, with the binary
+search above, you will never get slower than O(n) time with simple search.
+
+
+
+
+Common Big O Runtimes from Fastest to Slowest:
+O(log n) known as log time: Example: Binary Search
+O(n) known as linear time: Example: Simple Search
+O(n * log n): Example: A fast sorting algorithm, like quicksort
+O(n^2) Example: A slow sorting algorithm, like selection sort
+O(n!) Example: A really slow algorithm, like traveling salesperson
+
+Main Takeaways from the above:
+  - Algorithm speed isn't measured in seconds, but in growth of the # of operations.
+  - Instead we think about how quickly the runtime of an algorithm increases as input size increases.
+  - Runtime of algorithms is expressed in Big O
+  - O(log n) is faster than O(n), but it gets a lot faster as the list of items you're searching for grows.
+
+
+Practice Exercises: [Give the runtime of these scenarios in terms of Big O]
+1). You have a name and you want to find the person's phone number in the phonebook.
+
+1A). O(log n)
+
+2). You have a phone number, and you want to find the person's name in the phonebook. (Hint: You
+have to search through the whole book)
+
+2A). O(n)
+
+3). You want to read the numbers of every person in the phone book.
+
+3A). O(n)
+
+4). You want to read the number of just the A's.
+
+4A). O(n)
+
+
+The Traveling Salesperson:
+
+- You have a salesperson
+- The salesperson has to go to 5 cities.
+- They need to travel to all 5 cities using minimal distance
+
+One way to do this is to look at every possible order in which he could travel to the cities.
+Then they add up the total distance and then picks the path with the lowest distance.
+
+So there are 120 permutations with 5 cities or 5! So it will take 120 operations to solve
+the problem for 5 cities. For 6 cities it would take 720 operations. For 7, it takes 5040.
+
+It's clear that the number of operations increase drastically. In general, for n items,
+it will take n! operations to compute the result. So this is O(n!) time. It takes a lot of operations
+for everything except the smallest numbers. Once dealing with 100+ cities, it's impossible to calculate
+the answer as the Sun would collapse first.
+
+Salesperson should use another algorithm... but they can't. This is one of the unsolved problems in computer science.
+There's no fast known algorithm and it is thought impossible to have such a smart algorithm. We can only
+approximate the solution.
+
+Recap:
+ - Binary search is a lot faster than simple search
+ - O(log n) is faster than O(n) but gets faster once the list of items grow.
+ - Algo speed isn't measured in seconds.
+ - Algo times are measured in terms of growth.
+ - Algo times are written in Big O notation.
+
+
+ Ex). Write a basic binary search algorithm in python.
+
+ def binary_search(sorted_list, item):
+    low = 0
+    high = len(sorted_list) - 1
+
+    while low <= high:
+      mid = (low + high)/ 2
+      guess = sorted_list[mid]
+      if guess == item:
+        return mid
+      if guess > item:
+        high = mid - 1
+      else:
+        low = mid + 1
+    return None
+----------------------------------------------------------------------------------------------------------------
+
+Selection Sort
+
+Linked Lists and Arrays
+
+Linked lists contain a series of values in memory that link to each other in discontiguous blocks.
+Ex). Say you are at the movies with friends and you decide to watch the movie separately b/c not enough seats.
+They are good at insertion.
+
+For common operations, the runtime of Lists with reading is O(n), where the insertion runtime is O(1)
+
+
+Arrays are discrete and continuous and cannot be broken up, but you know exactly how many values you have and
+need to store in memory.
+
+Ex). Say you are in the movies and there are not enough seats for all of your friends in one area (memory) so you
+move to another section until you have enough space (but there may be unused memory or seats in this example and no other
+program can access this memory. This is where linked lists solve this problem. Linked lists don't have to be contiguous)
+
+For common operations, the runtime of reading is O(1) where as the insertion runtime on an array is O(n).
+
+
+
+
+**Question**: Why does it take O(n) runtime for the insertion into an array? Suppose you wanted to insert an element at the
+beginning of an array...how would you do it? How long would it take?
+
+
+
+Ex 1). Suppose you are building an app to keep track of your finances.
+
+1. Food
+2. Treehouse Subscription
+3. Intertel Membership
+
+And everyday you write down everything you spent money on. At the end of the month you review expenses and sum up how much
+you spent. So you have many inserts and a few reads. Should you use an array or a list?
+
+Answer: Linked Lists are good at insertions and deletions but are slow with accessing random elements in the list. 
+Since you will be reviewing the expenses at the end of the month, it happens that Linked Lists are good at sequential reads.
+
+Arrays have fast reads but slow inserts so it would NOT be the best choice.
+
+
+[INSERTIONS]
+Inserting into the middle of a list.
+Suppose that, all the while, you've been inserting data at the end of this list and you want it to work more like a calendar.
+Would you use a list or an array?
+
+Logic:
+
+For a List: With a list, all you'd have to do is change what the previous element in the list points to...this new todo item. Simple.
+
+For an Array: You have to shift all of the elements down. What if the array contains 2 million elements? Well if there is no space you might have to move this entire
+data structure into a new place in memory.
+
+
+For this reason... LISTS are a better choice if you want to insert elements into the middle.
+
+[DELETIONS]
+
+If you wanted to delete an element, lists are still better because you still need to change where the element points to.
+Again, with arrays, everything needs to be moved up.
+
+Unlike insertions, deletions will always work...insertions may fail if memory is unavailable.
+
+
+Again, reviewing runtimes, we have:
+
+                  ARRAYS          LISTS
+READING           O(1)            O(n)
+
+INSERTION         O(n)            O(1)
+
+DELETION          O(n)            O(1)
+
+**NOTE: INSERTIONS & DELETIONS are O(1) time only if you can instantly access the element to be deleted. 
+It is common to keep track of a linked list's first and last elements...for this reason the speed of deletion is O(1).
+
+Which are used more: lists or arrays? 
+-> This depends on the use case. Arrays see a lot more use because they see a lot more random access.
+    -> There are two types of access:
+      1). Random Access:
+      2). Sequential Access: Reading the elements one by one, starting at the first element.
+      
+Linked Lists can only do sequential access. So if you want to read the 10th element of a linked list you have to read the first 9 elements and follow the links to the 10th element.
+
+Arrays read at faster speeds because using random access, you jump directly to the 10th element. 
+  -> A lot of use cases require random access, so arrays are used often.
+
+Arrays and Lists are used to implement other data structures.
+
+Ex 2).Suppose you're building an app for restaurants to take customer orders. Your app needs to store a list of orders.
+Servers keep adding orders to this list, and chefs take orders off the list and make them. 
+It's an order queue: servers add orders to the back of the queue, and the chef takes the first order off the queue and cooks it.
+Would you use a linked list or an array for implementing this queue? (Hint: Linked Lists are good for inserts/deletes and arrays are good for random access)
+
+Ans 2). I would use a Linked List because the chef is always taking off of the end of the queue.
+
+
+Ex 3). Suppose that Facebook keeps a list of usernames. When someone tries to login to Facebook, a search is done for their username. If their name is in the list of user names, they can login.
+People login fairly often, so there are a lot of searches throughout this list. Suppose that binary search is used to search the list. We know that Binary Search needs random access--you need
+to be able to get to the middle of the list of usernames, instantly. Would you implement this as an array or a linked list?
+
+Ans 3). I would implement this as an array because of fast reads. To be more specific this would need to be a sorted array. You can't an element from the middle of linked lists. 
+To get to the middle element in a linked list, you'd have to start at the first element and follow all the links down to the middle element.
+
+
+Ex 4). People sign up for Facebook pretty often, too. Suppose you decided to use an array to store the list of users? What are the downsides of an array for inserts? 
+In particular, suppose you're using binary search for logins. What happens when you add new users to an array?
+
+Ans 4). Assuming the list is ordered the runtime would be O(n) for insertion, it would be slow because you're only getting to the middle of the list. 
+If you have users logging in and you are using binary search, it cuts the array in half when the insertion point may be shifted as new users sign up.
+
+Ex 5). In reality, Facebook uses neither an array nor a linked list to store user information. 
+Let's consider a hybrid data structure: an array of linked lists. You have an array with 26 slots. Each slot points to a linked list. 
+For example, the first slot in the array points to a linked list containing all of the usernames that begins with a. The 2nd slot with b, and so on.
+Suppose Adit B signs up for FaceBook, and you want to add them to the list. You go to slot 1 in the array, go to the linked list for slot one, and add Adit B at the end.
+Now suppose you want to search for Zakhir H. You go to slot #26, which points to a linked list of all of the Z names. Then you search through that list to find Zakhir H.
+
+Compare this hybrid data structure to arrays and linked lists. Is it slower or faster than each for searching and inserting? You don't have to give Big O runtimes, just
+whether the new data structure would be faster or slower.
+
+Ans 5). For searching, this data structure is slower than arrays and faster than linked lists.
+
+
+[Selection Sort]
+
+Say you have a grid of songs that have a number of plays. Say you want to order the songs by the number of plays from lowest to highest (this example) or even most to least.
+
+You'd use selection sort.
+
+Selection sort has a runtime of O(n^2)
+
+Selection Sort Algorithm:
+
+def findSmallest(arr):
+  smallest = arr[0]        #Stores the smallest value
+  smallest_index = 0       #Stores the index of the smallest value
+  for i in range(1, len(arr)):
+    if arr[i] < smallest:
+      smallest = arr[i]
+      smallest_index = i
+  return smallest_index
+
+
+Now you can use this function to write selection sort:
+
+def selectionSort(arr): Sorts an array
+  newArr = []
+  for i in range(len(arr)):
+    smallest = findSmallest(arr)
+    newArr.append(arr.pop(smallest))   <--finds smallest element in the array and adds it to new array.
+  return newArr
+
+#example
+print selectionSort([5, 3, 6, 2, 10])
+
+
+[RECAP]
+
+- Your computer's memory is like a set of drawers
+- When you want to store multiple elements, use an array or list
+- With an array, elements are stored right next to each other.
+- With a list, elements are strewn all over, and one element stores the address of the next one.
+- Arrays allow fast reads.
+- Linked Lists allow fast inserts and deletions.
+- All elements in the array should be the same type (all ints, all doubles, and so on)
+
+----------------------------------------------------------------------------------------------------------------
+
+Recursion
+ - Will learn how to break down a problem into a base case and a recursive case.
+ 
+ 
+ 
+Two simple flows for recursion:
+
+Flow 1:
+
+Make a pile of boxes to look through
+              |
+  While the pile isn't empty
+              |
+          Grab a box -------------------         
+         /                               \
+      If you find a box,                If you find a key, you're done
+      add it to pile and look 
+      through later
+     /
+    Go back to the pile
+
+
+
+
+Flow 2:
+Go through every item in the box
+        /             \
+If you find box        If you find key,
+Go to step 1.          you are done
+
+
+
+Pythonic Examples:
+
+def look_for_key(mail_box):
+    pile = main_box.make_a_pile_to_look_through()
+    while pile is not empty:
+        box = pile.grab_a_box()
+        for item in box:
+            if item.is_a_box():
+                pile.append(item)
+            elif item.is_a_key():
+                print "Found the key!"
+
+def look_for_key(box):
+    for item in box:
+        if item.is_a_box():
+            look_for_key(item) #Recursion
+        elif item.is_a_key():
+            print "Found the key!"    
+
+The code is cleaner with an occasional performance benefit. Loops are sometimes better for performance.
+
+Base Case and Recursive Case
+
+When you write a recursive function, you often must tell the function when to stop "recursing.""
+A recursive function has a recursive case: Where the recursive function is called; and a base case:
+Where the function does not call itself again.
+
+Ex). Countdown Function:
+
+def countdown(i):
+    print(i)
+    if i <= 0:          <- Base Case
+        return
+    else:
+        countdown(n-1)  <- Recursive Case
+
+
+
+
+Call Stacks
+
+Suppose you are throwing a BBQ and you want to keep a todo list
+
+
+
+
+
+
+
+
+
+
+
